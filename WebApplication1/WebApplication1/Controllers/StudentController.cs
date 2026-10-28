@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Dtos;
 using WebApplication1.Models;
@@ -7,12 +8,12 @@ namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StudentController(StudentStorage studentStorage) : Controller
+    public class StudentController(AppDbContext db) : Controller
     {
         [HttpGet]
-        public List<StudentResponse> GetAll()
+        public async Task<List<StudentResponse>> GetAll(CancellationToken ct)
         {
-            List<Student> students = studentStorage.GetAll();
+            List<Student> students = await db.Studenti.ToListAsync(ct);
             return students.Select(Mapiraj).ToList();
         }
 
