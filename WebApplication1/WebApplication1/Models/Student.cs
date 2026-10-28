@@ -8,5 +8,7 @@
         public string BrojIndeksa { get; set; }
         public DateOnly? DatumRodjenja { get; set; }
         public DateTime DatumKreiranja { get; set; }
+        public int? SmjerId { get; set; }
+        public Smjer? Smjer { get; set; }
     }
 }
